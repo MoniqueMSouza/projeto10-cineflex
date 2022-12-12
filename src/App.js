@@ -5,8 +5,11 @@ import SelecioneOsAssentos from "./SelecioneOsAssentos";
 import Sucesso from "./Sucesso";
 import GlobalStyle from "./GlobalStyle";
 import styled from 'styled-components';
+import { useState } from "react";
 
 export default function App() {
+  const [filmeSelecionado, setFilmeSelecionado] = useState()
+
   return (
 
     <BrowserRouter>
@@ -14,9 +17,9 @@ export default function App() {
         <Header><p>CINEFLEX</p></Header>
         <GlobalStyle />
         <Routes>
-          <Route path="/" element={<SelecioneOFilme />} />
-          <Route path="/sessoes/37" element={<SelecioneOHorario />} />
-          <Route path="/assentos/240" element={<SelecioneOsAssentos />} />
+          <Route path="/" element={<SelecioneOFilme/>} />
+          <Route path="/sessoes/:filmeId" element={<SelecioneOHorario setFilmeSelecionado={setFilmeSelecionado} filmeSelecionado={filmeSelecionado}/>} />
+          <Route path="/assentos/:idSessao" element={<SelecioneOsAssentos filmeSelecionado={filmeSelecionado}/>} />
           <Route path="/sucesso" element={<Sucesso />} />
         </Routes>
       </ScreenContainer>
@@ -25,8 +28,8 @@ export default function App() {
 }
 
 const ScreenContainer = styled.div`
- background-color: #FB6B6B;
-  width: 100vw;
+ background-color: #E5E5E5;
+  min-width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,13 +43,15 @@ const ScreenContainer = styled.div`
  `
 const Header = styled.div`
   background-color: #C3CFD9;
-  width: 100vw;
+  width: 100%;
   height: 67px;
   display: flex;
   position:fixed;
   top:0;
   align-items: center;
   justify-content: center;
+
+
   
     P{
       font-weight:400;
