@@ -9,6 +9,9 @@ import { useState } from "react";
 
 export default function App() {
   const [filmeSelecionado, setFilmeSelecionado] = useState()
+  const [name, setName] = useState("")
+  const [cpf, setCpf] = useState("")
+  const [numeroAssento, setNumeroAssento] = useState([])
 
   return (
 
@@ -17,10 +20,30 @@ export default function App() {
         <Header><p>CINEFLEX</p></Header>
         <GlobalStyle />
         <Routes>
-          <Route path="/" element={<SelecioneOFilme/>} />
-          <Route path="/sessoes/:filmeId" element={<SelecioneOHorario setFilmeSelecionado={setFilmeSelecionado} filmeSelecionado={filmeSelecionado}/>} />
-          <Route path="/assentos/:idSessao" element={<SelecioneOsAssentos filmeSelecionado={filmeSelecionado}/>} />
-          <Route path="/sucesso" element={<Sucesso />} />
+          <Route path="/" element={<SelecioneOFilme />} />
+          <Route path="/sessoes/:filmeId" element={
+            <SelecioneOHorario
+              setFilmeSelecionado={setFilmeSelecionado}
+              filmeSelecionado={filmeSelecionado} />}
+          />
+          <Route path="/assentos/:idSessao" element={
+            <SelecioneOsAssentos
+              filmeSelecionado={filmeSelecionado}
+              name={name}
+              setName={setName}
+              cpf={cpf}
+              setCpf={setCpf}
+              setNumeroAssento={setNumeroAssento}
+              numeroAssento={numeroAssento}
+            />}
+          />
+          <Route path="/sucesso" element={
+            <Sucesso
+              filmeSelecionado={filmeSelecionado}
+              name={name}
+              cpf={cpf}
+              numeroAssento={numeroAssento} />}
+          />
         </Routes>
       </ScreenContainer>
     </BrowserRouter>

@@ -28,7 +28,7 @@ export default function SelecioneOFilme() {
 
         {filmes.map(filme =>
           <Link to={`/sessoes/${filme.id}`} key={filme.id}>
-            <Filme>
+            <Filme data-test="movie">
               <img src={filme.posterURL} />
             </Filme>
           </Link>

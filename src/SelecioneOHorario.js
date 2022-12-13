@@ -4,7 +4,7 @@ import styled from "styled-components"
 import axios from "axios"
 import { Link } from "react-router-dom"
 
-export default function SelecioneOHorario({filmeSelecionado, setFilmeSelecionado}) {
+export default function SelecioneOHorario({ filmeSelecionado, setFilmeSelecionado }) {
 
   const { filmeId } = useParams()
   const [detalhes, setDetalhes] = useState(undefined)
@@ -16,7 +16,7 @@ export default function SelecioneOHorario({filmeSelecionado, setFilmeSelecionado
       console.log(res.data.days)
       setFilmeSelecionado(res.data)
       console.log(res.data)
-      
+
     })
     promise.catch((err) => console.log(err.response.data))
   }, [])
@@ -28,19 +28,19 @@ export default function SelecioneOHorario({filmeSelecionado, setFilmeSelecionado
     <ScreenContainer>
       <TituloPag> Selecione o horário</TituloPag>
 
-      {detalhes.map((i, index) => {
+      {detalhes.map((data, index) => {
         return (
-          <Sessao key={index}>
+          <Sessao data-test="movie-day" key={index}>
 
-            <h3>{i.weekday} - {i.date}</h3>
+            <h3>{data.weekday} - {data.date}</h3>
 
             <Horarios>
 
-              {i.showtimes.map((hour, index) => {
+              {data.showtimes.map((hora, index) => {
 
                 return (
-                  <Link to={`/assentos/${hour.id}`}>
-                    <Horario key={index} onClick={() => console.log(index)}> {hour.name}</Horario>
+                  <Link to={`/assentos/${hora.id}`}>
+                    <Horario data-test="showtime" key={index} onClick={() => console.log(index)}> {hora.name}</Horario>
                   </Link>
 
                 )
@@ -50,10 +50,10 @@ export default function SelecioneOHorario({filmeSelecionado, setFilmeSelecionado
         )
       })}
 
-      <Rodape>
+      <Rodape data-test="footer">
         <div><img src={filmeSelecionado.posterURL} /></div>
-         {filmeSelecionado.title}</Rodape>
-      </ScreenContainer>
+        {filmeSelecionado.title}</Rodape>
+    </ScreenContainer>
   )
 
 
