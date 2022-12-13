@@ -5,24 +5,37 @@ import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 
 
+
 export default function SelecioneOsAssentos({ filmeSelecionado, name, setName, cpf, setCpf, setNumeroAssento, numeroAssento }) {
   const { idSessao } = useParams()
   const [assentos, setAssentos] = useState(undefined)
-
   const [assentosSelecionados, setAssentosSelecionados] = useState([])
 
   function selecionarAssento(clicado) {
-console.log(clicado)
-if (clicado.isAvailable === false) {
-  alert("Esse assento não está disponível")
-}
-if(clicado.isAvailable === true) {
+    console.log(clicado)
+    if (clicado.isAvailable === false) {
+      alert("Esse assento não está disponível")
+    }
+    if (clicado.isAvailable === true) {
 
-    setAssentosSelecionados([...assentosSelecionados, clicado.id])
-    setNumeroAssento([...numeroAssento, clicado.name])
-    console.log(assentosSelecionados)
-    console.log(numeroAssento)
-}
+      setAssentosSelecionados([...assentosSelecionados, clicado.id])
+      setNumeroAssento([...numeroAssento, clicado.name])
+      
+      console.log(numeroAssento)
+    }
+
+  }
+
+  function ReservarAssento(){
+    const postURL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+    const dadosReserva = {
+      ids: assentosSelecionados,
+      name: name,
+      cpf: cpf
+    }
+    const promessa = axios.post(postURL, dadosReserva)
+    promessa.then(alert('Deu Certo'))
+    console.log(dadosReserva)
 
   }
 
@@ -92,14 +105,14 @@ if(clicado.isAvailable === true) {
 
         />
         <Link to={"/sucesso"}>
-          <Button>Reservar assento(s)</Button>
+          <Button onClick={ReservarAssento}>Reservar assento(s)</Button>
         </Link>
-        </form>
+      </form>
 
-        <Rodape data-test="footer">
-          <div><img src={filmeSelecionado.posterURL} /></div>
-          {filmeSelecionado.title}</Rodape>
-      
+      <Rodape data-test="footer">
+        <div><img src={filmeSelecionado.posterURL} /></div>
+        {filmeSelecionado.title}</Rodape>
+
     </ScreenContainer>
 
   );
@@ -128,14 +141,14 @@ display: flex;
 const Assento = styled.div`
 width:26px;
 height:26px;
-border: 1px solid ${props => props.verificaçao ? "#0E7D71" : props.isAvailable ? "#7B8B99":"#F7C52B"};
+border: 1px solid ${props => props.verificaçao ? "#0E7D71" : props.isAvailable ? "#7B8B99" : "#F7C52B"};
 border-radius: 12px;
 margin-left: 7px;
 margin-bottom:18px ;
 display: flex;
 align-items: center;
 justify-content:center;
-background-color: ${props => props.verificaçao ? "#1AAE9E" : props.isAvailable ? "#C3CFD9":"#FBE192"}
+background-color: ${props => props.verificaçao ? "#1AAE9E" : props.isAvailable ? "#C3CFD9" : "#FBE192"}
 
 `
 const Detalhes = styled.div`

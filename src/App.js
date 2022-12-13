@@ -39,9 +39,13 @@ export default function App() {
           />
           <Route path="/sucesso" element={
             <Sucesso
+            setFilmeSelecionado={setFilmeSelecionado}
               filmeSelecionado={filmeSelecionado}
+              setName={setName}
               name={name}
+              setCpf={setCpf}
               cpf={cpf}
+              setNumeroAssento={setNumeroAssento}
               numeroAssento={numeroAssento} />}
           />
         </Routes>

@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom"
 
-export default function Sucesso({ filmeSelecionado, name, cpf, numeroAssento }) {
-  return (
+export default function Sucesso({ setFilmeSelecionado, filmeSelecionado,setName, name, setCpf, cpf, setNumeroAssento, numeroAssento }) {
 
+  function resetar(){
+    setFilmeSelecionado()
+    setName("")
+    setCpf("")
+    setNumeroAssento([])
+  }
+
+  return (
 
     <ScreenContainer>
       <TituloPag> Pedido feito com sucesso!</TituloPag>
@@ -22,7 +29,7 @@ export default function Sucesso({ filmeSelecionado, name, cpf, numeroAssento }) 
         <div>{cpf}</div>
       </div>
       <Link to={"/"}>
-        <Button data-test="go-home-btn">Voltar pra Home</Button>
+        <Button data-test="go-home-btn" onClick={resetar}>Voltar pra Home</Button>
       </Link>
 
     </ScreenContainer>
