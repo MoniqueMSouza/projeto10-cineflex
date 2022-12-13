@@ -8,7 +8,19 @@ export default function SelecioneOHorario({ filmeSelecionado, setFilmeSelecionad
 
   const { filmeId } = useParams()
   const [detalhes, setDetalhes] = useState(undefined)
+  const [dia, setDia] = useState()
+  const [data, setData] = useState()
+  const [hora, setHora] = useState()
 
+function SalvarEstados(index) {
+setDia(data.weekday)
+setData(data.date)
+setHora(index)
+console.log(dia)
+console.log(data)
+console.log(hora)
+
+  }
   useEffect(() => {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${filmeId}/showtimes`)
     promise.then((res) => {
@@ -30,17 +42,17 @@ export default function SelecioneOHorario({ filmeSelecionado, setFilmeSelecionad
 
       {detalhes.map((data, index) => {
         return (
-          <Sessao data-test="movie-day" key={index}>
-
-            <h3>{data.weekday} - {data.date}</h3>
-
+          <Sessao data-test="movie-day"key={index}>
+            <Data>
+              {data.weekday} - {data.date}
+            </Data>
             <Horarios>
 
               {data.showtimes.map((hora, index) => {
 
                 return (
                   <Link to={`/assentos/${hora.id}`}>
-                    <Horario data-test="showtime" key={index} onClick={() => console.log(index)}> {hora.name}</Horario>
+                    <Horario data-test="showtime" key={index} onClick={()=> SalvarEstados(index)}> {hora.name}</Horario>
                   </Link>
 
                 )
@@ -69,15 +81,18 @@ margin-top: 50px;
 margin-bottom: 50px;
 font-size:24px;
 `
+
+
 const Sessao = styled.div`
 margin-bottom: 23px;
 
-h3{
-  font-size: 20px;
+
+
+`
+const Data = styled.div`
+font-size: 20px;
   color: #293845;
   margin-left: 24px;
-}
-
 `
 const Horarios = styled.div`
 margin-top: 23px;
@@ -86,7 +101,7 @@ display: flex;
 
 `
 
-const Horario = styled.div`
+const Horario = styled.button`
 width:82px;
 height: 43px;
 background-color:#E8833A;
@@ -97,6 +112,7 @@ align-items: center;
 justify-content: center;
 color:white;
 text-decoration:none;
+border:none;
 
 `
 

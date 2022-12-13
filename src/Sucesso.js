@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom"
 
-export default function Sucesso({ setFilmeSelecionado, filmeSelecionado,setName, name, setCpf, cpf, setNumeroAssento, numeroAssento }) {
+export default function Sucesso({ setFilmeSelecionado, filmeSelecionado, setName, name, setCpf, cpf, setNumeroAssento, numeroAssento }) {
 
-  function resetar(){
+  function resetar() {
     setFilmeSelecionado()
     setName("")
     setCpf("")
@@ -14,20 +14,24 @@ export default function Sucesso({ setFilmeSelecionado, filmeSelecionado,setName,
 
     <ScreenContainer>
       <TituloPag> Pedido feito com sucesso!</TituloPag>
-      <div data-test="movie-info">
-        <Dados>Filme e Sessão</Dados>
-        <div>{filmeSelecionado.title}</div>
-      </div>
-      <div data-test="seats-info">
-        <Dados>Ingressos</Dados>
+
+      <Infos data-test="movie-info">
+        <h1>Filme e Sessão</h1>
+        <h2>{filmeSelecionado.title}</h2>
+      </Infos>
+
+      <Infos data-test="seats-info">
+        <h1>Ingressos</h1>
         {numeroAssento.map(numero =>
-          <div>Assento {numero}</div>)}
-      </div>
-      <div data-test="client-info">
-        <Dados>Comprador</Dados>
-        <div>{name}</div>
-        <div>{cpf}</div>
-      </div>
+          <h2>Assento {numero}</h2>)}
+      </Infos>
+
+      <Infos data-test="client-info">
+        <h1>Comprador</h1>
+        <h2>{name}</h2>
+        <h2>{cpf}</h2>
+      </Infos>
+
       <Link to={"/"}>
         <Button data-test="go-home-btn" onClick={resetar}>Voltar pra Home</Button>
       </Link>
@@ -52,14 +56,24 @@ margin-bottom: 50px;
 font-size:24px;
 color:#247A6B;
 `
+const Infos = styled.div`
+size:22px;
+color:#293845;
 
-const Dados = styled.div`
+h1{
 font-weight: 700;
 font-size: 24px;
 color: #293845;
 margin-top:16px;
 margin-bottom: 7px;
+}
+h2{
+font-weight:400;
+font-size:22px;
+}
 `
+
+
 const Button = styled.button`
 width: 225px;
 height: 42px;
