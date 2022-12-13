@@ -20,13 +20,22 @@ export default function SelecioneOsAssentos({ filmeSelecionado, name, setName, c
 
       setAssentosSelecionados([...assentosSelecionados, clicado.id])
       setNumeroAssento([...numeroAssento, clicado.name])
-      
-      console.log(numeroAssento)
+
+      if (assentosSelecionados.includes(clicado.id)) {
+        setAssentosSelecionados([assentosSelecionados.splice(clicado.id)])
+             
+      }
+      if (numeroAssento.includes(clicado.name)){
+        setNumeroAssento([numeroAssento.splice(clicado.name)])
+      }
+
     }
+console.log(numeroAssento)
+console.log(assentosSelecionados)
 
   }
 
-  function ReservarAssento(){
+  function ReservarAssento() {
     const postURL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
     const dadosReserva = {
       ids: assentosSelecionados,
