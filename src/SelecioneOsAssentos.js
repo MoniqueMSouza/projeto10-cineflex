@@ -12,10 +12,17 @@ export default function SelecioneOsAssentos({ filmeSelecionado, name, setName, c
   const [assentosSelecionados, setAssentosSelecionados] = useState([])
 
   function selecionarAssento(clicado) {
+console.log(clicado)
+if (clicado.isAvailable === false) {
+  alert("Esse assento não está disponível")
+}
+if(clicado.isAvailable === true) {
+
     setAssentosSelecionados([...assentosSelecionados, clicado.id])
     setNumeroAssento([...numeroAssento, clicado.name])
     console.log(assentosSelecionados)
     console.log(numeroAssento)
+}
 
   }
 
@@ -121,7 +128,7 @@ display: flex;
 const Assento = styled.div`
 width:26px;
 height:26px;
-border: 1px solid #808F9D;
+border: 1px solid ${props => props.verificaçao ? "#0E7D71" : props.isAvailable ? "#7B8B99":"#F7C52B"};
 border-radius: 12px;
 margin-left: 7px;
 margin-bottom:18px ;
