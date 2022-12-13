@@ -88,10 +88,12 @@ export default function SelecioneOsAssentos({ filmeSelecionado, name, setName, c
         <Link to={"/sucesso"}>
           <Button>Reservar assento(s)</Button>
         </Link>
-        <Rodape>
-          <div><img src={filmeSelecionado.posterURL} onClick={() => console.log(filmeSelecionado)} /></div>
+        </form>
+        
+        <Rodape data-test="footer">
+          <div><img src={filmeSelecionado.posterURL} /></div>
           {filmeSelecionado.title}</Rodape>
-      </form>
+      
     </ScreenContainer>
 
   );
@@ -127,12 +129,7 @@ margin-bottom:18px ;
 display: flex;
 align-items: center;
 justify-content:center;
-background-color: ${props => props.verificaçao ? "#1AAE9E" : props.isAvailable ? "#C3CFD9" : "#FBE192"}
-
-
-
-
-
+background-color: ${props => props.verificaçao ? "#1AAE9E" : props.isAvailable ? "#FBE192": "#C3CFD9"}
 
 `
 const Detalhes = styled.div`
