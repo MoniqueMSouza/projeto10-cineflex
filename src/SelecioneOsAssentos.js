@@ -40,8 +40,7 @@ export default function SelecioneOsAssentos({ filmeSelecionado, name, setName, c
       <Assentos>
         {assentos.map(assento =>
 
-          <Assento
-            data-test="seat"
+          <Assento data-test="seat"
             key={assento.id}
             onClick={() => {
               selecionarAssento(assento)
@@ -89,7 +88,7 @@ export default function SelecioneOsAssentos({ filmeSelecionado, name, setName, c
           <Button>Reservar assento(s)</Button>
         </Link>
         </form>
-        
+
         <Rodape data-test="footer">
           <div><img src={filmeSelecionado.posterURL} /></div>
           {filmeSelecionado.title}</Rodape>
@@ -129,7 +128,7 @@ margin-bottom:18px ;
 display: flex;
 align-items: center;
 justify-content:center;
-background-color: ${props => props.verificaçao ? "#1AAE9E" : props.isAvailable ? "#FBE192": "#C3CFD9"}
+background-color: ${props => props.verificaçao ? "#1AAE9E" : props.isAvailable ? "#C3CFD9":"#FBE192"}
 
 `
 const Detalhes = styled.div`
